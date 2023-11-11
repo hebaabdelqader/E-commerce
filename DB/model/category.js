@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { Schema,model } from "mongoose";
+import { Schema,model,Types } from "mongoose";
 const categorySchema= new Schema({
     name:{
         type:String,
@@ -19,12 +19,20 @@ const categorySchema= new Schema({
         default:'Active',
         enum:['Active','Inactive'],
     },
-   // createdBy:{type:Types.ObjectId,reg:'User'},
-    //updatededBy:{type:Types.ObjectId,reg:'User'},
+    createdBy:{type:Types.ObjectId,ref:'User',required:"true"},
+    updatededBy:{type:Types.ObjectId,ref:'User',required:'true'},
 },
 {
     timestamps:true,
+    toJSON:{virtuals:true},
+    toObject:{virtuals:true}
 }
 );
-const categoryModel= mongoose.model.Category ||model('Category',categorySchema);
+categorySchema.virtual('subcategory',{
+    localField:'_id',
+    foreignField:'categoryId',
+    ref:'subCategory'
+})
+const categoryModel= mongoose.models.Category ||model('Category',categorySchema);
+
 export default categoryModel;
