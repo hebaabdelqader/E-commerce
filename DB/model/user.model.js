@@ -43,6 +43,10 @@ const userSchema= new Schema({
         default:'User',
         enum:['User','Admin']
     },
+    Sendcode:{
+        type:String,
+        default:null
+    }
 },
 {
     timestamps:true,

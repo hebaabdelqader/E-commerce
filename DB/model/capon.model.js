@@ -22,5 +22,5 @@ const couponSchema= new Schema({
 }
 );
 
-const couponModel= mongoose.model.Category ||model('coupon',couponSchema);
+const couponModel= mongoose.models.Category ||model('Coupon',couponSchema);
 export default couponModel;
